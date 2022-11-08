@@ -1,0 +1,51 @@
+#include "..\..\Helpers\myHeader.h"
+#include "Employee.h"
+
+using namespace std;
+
+const string DIRECTIONS = "Enter a employee";
+
+void getEmployeeInfo(Employee& aEmployee)
+{
+	string name;
+	double payRate;
+	float hoursWorked;
+
+	getString("Employe name ", name);
+	aEmployee.setName(name);
+
+	getNumber("Pay rate", aEmployee.Min_Payrate, aEmployee.Max_Payrate, payRate);
+	aEmployee.setPayrate(payRate);
+
+	getNumber("Hours worked", aEmployee.Min_Hours, aEmployee.Max_Hours, hoursWorked);
+	aEmployee.setHours(hoursWorked);
+}
+
+void displayEmployeeInformation(Employee aEmployee)
+{
+	displaySeparator();
+	cout << aEmployee.getEmployeeInfo() << endl;
+}
+
+int main()
+{
+	Employee aEmployee;
+	vector<Employee> employeelist;
+
+	displayApplicationInformation("Employee payment calculator", "Enter employee information");
+
+	do {
+
+		displayDirections(DIRECTIONS);
+		getEmployeeInfo(aEmployee);
+		displayEmployeeInformation(aEmployee);
+
+		employeelist.push_back(aEmployee);
+
+
+	} while (keepGoing());
+
+	terminateApplication("Employee");
+
+	return 0;
+}
